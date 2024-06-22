@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define         fi first
+#define         se second
+#define         ll long long
+#define         pb push_back
+#define        pll pair<ll,ll>
+#define       endl '\n'
+#define    mask(i) (1LL<<(i))
+#define    on(i,j) (mask(j)|(i))
+#define   bit(i,j) (mask(j)&(i))
+#define   off(i,j) (~mask(j)&(i))
+
+
+#define task ""
+int main(){
+    if (fopen(task".inp","r")){
+        freopen(task".inp","r",stdin);
+        freopen(task".out","w",stdout);
+    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+
+    return 0;
+}
