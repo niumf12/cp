@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define         fi first
+#define         se second
+#define         ll long long
+#define         pb push_back
+#define        pll pair<ll,ll>
+#define       endl '\n'
+#define    mask(i) (1LL<<(i))
+#define    on(i,j) (mask(j)|(i))
+#define   bit(i,j) (mask(j)&(i))
+#define   off(i,j) (~mask(j)&(i))
+
+const ll MX = 1e5 + 5;
+ll n, m, sum = 0;
+pll a[MX];
+bool CMP(pll a,pll b){
+    return a.fi > b.fi;
+}
+ll res[MX];
+void solve(){
+    cin >> n >> m;
+    for (ll i = 1; i <= n; ++i){
+        cin >> a[i].fi;
+        sum += a[i].fi;
+        a[i].se = i;
+    }
+    if (sum < m){
+        cout << -1;
+        return;
+    }
+    sort(a+1,a + 1 + n, CMP);
+    sum -= m; /// khong su dung M nua
+    ll MAX = a[1].fi;
+    ll MIN = a[n].fi;
+    for (ll i = 2; i <= n+1; ++i){
+        ll need;
+        if (i == n + 1) need = 1e18;
+        else need = (i-1) * (MAX - a[i].fi);
+        if (sum >= need){
+            sum -= need;
+            MAX = a[i].fi;
+        } else {
+            ll current = sum / (i-1);
+            sum %= (i-1);
+            for (ll j = 1; j < i; ++j){
+                res[a[j].se] = MAX - current - (sum > 0);
+                sum--;
+            }
+            for (ll j = i; j <= n; ++j){
+                res[a[j].se] = a[j].fi;
+            }
+            for (ll j = 1; j <= n; ++j){
+                cout << res[j] << ' ';
+            }
+            return;
+        }
+    }
+    /// con 1 truong hop M qua nhieu nho xu ly
+}
+
+/**
+5 34
+9 8 9 9 4
+**/
+
+#define task "SHARE"
+int main(){
+    if (fopen(task".inp","r")){
+        freopen(task".inp","r",stdin);
+        freopen(task".out","w",stdout);
+    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    solve();
+
+    return 0;
+}
