@@ -1,0 +1,137 @@
+/// DON'T TRY THIS AT HOME
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define         fi first
+#define         se second
+#define         ll long long
+#define         pb push_back
+#define        pll pair<ll,ll>
+#define       endl '\n'
+#define    mask(i) (1LL<<(i))
+#define    on(i,j) (mask(j)|(i))
+#define   bit(i,j) (mask(j)&(i))
+#define   off(i,j) (~mask(j)&(i))
+
+const ll MX = 202;
+
+ll n,K;
+
+struct car{
+    bool type;
+    ll t1,t2;
+};
+car a[MX];
+ll vi[MX];
+void solve(){
+    cin >> n >> K;
+    for (ll i = 1; i <= n; ++i){
+        char type; cin >> type;
+        a[i].type = (type == 'A');
+        cin >> a[i].t1 >> a[i].t2;
+    }
+    ll res = 1e18;
+    for (ll i = 1; i <= n; ++i){
+        memset(vi,false,sizeof vi);
+        vi[i] = 1;
+        ll time = a[i].t1 + a[i].t2;
+        bool type = a[i].type;
+        for (ll j = 1; j < n; ++j){
+            ll uutien = 0;
+            ll MAX = -1e18;
+            ll kouutien = 0;
+            ll MIN = 1e18;
+            ll sieudacbiet = 0;
+            ll SUPERDACBIET = 0;
+            bool FLAG = 1;
+            for (ll k = 1; k <= n; ++k){
+                if (vi[k]) continue;
+                if (a[k].type != type){
+                    if (a[k].t1 <= time){
+                        if (MAX < a[k].t2){
+                            MAX = a[k].t2;
+                            uutien = k;
+                        }
+                    } else {
+                        ll tienlo = a[k].t1 - time;
+                        if (MIN > tienlo){
+                            MIN = tienlo;
+                            kouutien = k;
+                        }
+                    }
+                } else {
+                    if (a[k].t1 > time){
+                        ll tienlo = a[k].t1 - time;
+                        if (MIN > tienlo){
+                            FLAG = 1;
+                            MIN = tienlo;
+                            kouutien = k;
+                        }
+                    } else
+                    if (a[k].t1 <= time){
+                        ll hientai = (time - a[k].t1);
+                        ll thoigianchay = max(a[k].t2 - hientai,0ll);
+                        if (thoigianchay < K) thoigianchay = K;
+                        SUPERDACBIET += thoigianchay;
+                        if (SUPERDACBIET < MIN){
+                            MIN = SUPERDACBIET;
+                            kouutien = k;
+                            FLAG = 0;
+                        }
+                    }
+                }
+            }
+            if (sieudacbiet > 0){
+                vi[sieudacbiet] = 1;
+                time += K;
+                type = a[sieudacbiet].type;
+            }else
+            if (uutien > 0){
+                vi[uutien] = 1;
+                time += a[uutien].t2;
+                type = a[uutien].type;
+            } else {
+                if (FLAG == 0){
+                    time += MIN;
+                }else time += MIN + a[kouutien].t2;
+                vi[kouutien] = 1;
+                type = a[kouutien].type;
+            }
+        }
+        res = min(res,time);
+    }
+    cout << res;
+}
+/**
+4 10
+A 0 60
+B 19 10
+B 80 20
+A 85 100
+
+4 10
+A 0 100
+B 50 100
+A 100 1
+A 170 100
+**/
+
+#define task "BRIDGE"
+int main(){
+    if (fopen(task".inp","r")){
+        freopen(task".inp","r",stdin);
+        freopen(task".out","w",stdout);
+    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    solve();
+
+    return 0;
+}
