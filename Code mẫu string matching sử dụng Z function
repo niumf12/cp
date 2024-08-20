@@ -27,7 +27,7 @@ int z[MAX_N];
 
 void solve(){
 
-    string m, n; cin >> m >> n;
+    string m, n; cin >> n >> m;
 
     string Z = m + '#' + n;
 
@@ -35,7 +35,7 @@ void solve(){
 
     int x = 0, y = 0;
 
-    FOR(i,2,N){
+    FOR(i,1,N - 1){
         z[i] = max(0, min(z[i - x],(int)(y - i + 1)));
         while (i + z[i] < N && Z[z[i]] == Z[i + z[i]]){
             x = i, z[i]++, y++;
@@ -44,7 +44,7 @@ void solve(){
 
     cout << "Matching: " << endl;
 
-    FOR(i,1,N){
+    FOR(i,1,N-1){
         if (z[i] == m.size()){
             cout << i - m.size() << ' ';
         }
