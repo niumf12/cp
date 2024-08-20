@@ -1,0 +1,80 @@
+#define task ""
+#include <bits/stdc++.h>
+/**                         **/
+typedef long long ll;
+typedef long double db;
+using namespace std;
+/**                         **/
+#define endl    '\n'
+#define fi      first
+#define se      second
+#define pb      push_back
+#define eb      emplace_back
+#define pll     pair<ll,ll>
+#define ALL(x)  x.begin(),x.end()
+#define len(s)      ((int)(s.size()))
+#define mask(i)     (1LL<<(i))
+#define bit(i,j)    ((1LL<<(j))&(i))
+#define on(i,j)     ((1LL<<(j))|(i))
+#define off(i,j)    ((~(1LL<<(j)))&(i))
+#define FOR(i,a,b)  for(ll i = (a); i <= (b); ++i)
+#define FORD(i,a,b) for(ll i = (a); i >= (b); --i)
+/**                         **/
+
+#define MAX_N 3000005
+
+int z[MAX_N];
+
+void solve(){
+
+    string m, n; cin >> n >> m;
+
+    string Z = m + '#' + n;
+
+    int N = Z.length();
+
+    int x = 0, y = 0;
+
+    FOR(i,1,N - 1){
+        if (i + z[i - x] < y){
+            z[i] = z[i - x];
+        } else
+        if (i + z[i - x] == y){
+            z[i] = z[i - x];
+            while (z[i] + i < N && Z[z[i] + i] == Z[z[i]]){
+                x = i;
+                z[i]++; y++;
+            }
+            y = i + z[i] - 1;
+        } else {
+            z[i] = max(0ll,y - i + 1);
+            while (z[i] + i < N && Z[z[i] + i] == Z[z[i]]){
+                x = i;
+                z[i]++; y++;
+            }
+        }
+    }
+
+
+    //cout << "Matching: " << endl;
+
+    FOR(i,1,N-1){
+        if (z[i] == m.size()){
+            cout << i - m.size() << ' ';
+        }
+    }
+
+}
+
+/**                         **/
+int main(){
+    if (fopen(task".inp","r"))
+    {
+        freopen(task".inp","r",stdin);
+        freopen(task".out","w",stdout);
+    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    solve();
+    return 0;
+}
