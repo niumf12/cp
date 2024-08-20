@@ -1,1 +1,14 @@
+Giả sử chúng ta có 1 xâu pattern là M, và xâu chính là N. Giờ ta cần tìm vị trí xuất hiện của xâu M trong xâu N. 
 
+Ý tưởng sử dụng Z - Function như sau: 
+
+Đầu tiên ta hợp xâu M và N lại thành 1 xâu duy nhất (M đứng trước N) và có 1 dấu # ngăn cách giữa 2 xâu. 
+
+Ví dụ: 
+
+M = ABC 
+N = ABCDEFABC 
+
+Gọi xâu hợp lại là Z, ta có: 
+
+Z = ABC#ABCDEFABC
