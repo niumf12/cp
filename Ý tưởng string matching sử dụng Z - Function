@@ -13,6 +13,10 @@ Gọi xâu hợp lại là Z, ta có:
 
 Z = ABC#ABCDEFABC
 
+sau đó áp dụng thuật toán Z function để dựng một mảng z, 
+
+khi đó các vị trí giống M trong xâu N sẽ có giá trị z[i] = M.size()
+
 Tối ưu khi xử lý các bài tập sử dụng Z - function: 
 
 - Khi ta phải tìm string matching của xâu N với M xâu khác nhau. Khi này, ta sẽ tính trước phần Z function của
