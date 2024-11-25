@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define     endl        '\n'
+#define     int         long long
+#define     pb          push_back
+#define     eb          emplace_back
+#define     MASK(i)     (1ll << (i))
+#define     FOR(i,a,b)  for (int i = (a); i <= (b); ++i)
+#define     REV(i,a,b)  for (int i = (a); i >= (b); --i)
+using namespace std;
+
+void solve(){
+
+}
+
+#define task ""
+
+int32_t main(){
+    if (fopen(task".inp","r")){
+        freopen(task".inp","r",stdin);
+        freopen(task".out","w",stdout);
+    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    solve();
+    return 0;
+}
