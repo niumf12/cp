@@ -1,0 +1,29 @@
+#define MAX_SIZE 50
+struct Matrix{
+    int n, m;
+    int d[MAX_SIZE][MAX_SIZE];
+    Matrix(const int &_n, const int &_m) : n(_n), m(_m){
+        memset(d, 0, sizeof d);
+    }
+    Matrix operator * (const Matrix &a) const {
+        assert(m == a.n);
+        Matrix res(n, a.m);
+        for (int i = 0; i < n; ++i) for (int j = 0; j < a.m; ++j)
+        for (int k = 0; k < m; ++k){
+            (res.d[i][j] += d[i][k] * a.d[k][j]) %= MOD;
+        }
+        return res;
+    }
+    Matrix operator ^ (int b) const {
+        assert(n == m);
+        Matrix res(n, n);
+        Matrix a(n, n); a = *this;
+        for (int i = 0; i < n; ++i) res.d[i][i] = 1;
+        while (b > 0){
+            if (b & 1) res = res * a;
+            a = a * a;
+            b >>= 1;
+        }
+        return res;
+    }
+};
